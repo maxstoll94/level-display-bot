@@ -1,9 +1,9 @@
 {
-    "name": "greeter-bot",
+    "name": "level-display-bot",
     "version": "1.0.0",
-    "description": "My own Discord bot",
+    "description": "A bot that reads the 'level' up messages of MEE6 and displays the users level next to their name.",
     "main": "bot.js",
-    "author": "YOUR-NAME-HERE",
+    "author": "Maximilian Stoll",
     "dependencies": {
         "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
         "winston": "2"

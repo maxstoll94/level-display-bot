@@ -53,7 +53,7 @@ bot.on('message', function(botuser, botID, channelID, message, event) {
                         bot.editNickname({
                             serverID: bot.channels[channelID].guild_id,
                             userID: userID,
-                            nick: user.username + " 𝐋𝐕 " + level
+                            nick: user.username + config.displayFormat.format(level)
                         }, function(data){
                             logger.error(data);
                         });
@@ -63,3 +63,12 @@ bot.on('message', function(botuser, botID, channelID, message, event) {
         }       
     }
 });
+
+// custom string format function
+String.prototype.format = function() {
+    a = this;
+    for (k in arguments) {
+      a = a.replace("{" + k + "}", arguments[k])
+    }
+    return a
+  }
