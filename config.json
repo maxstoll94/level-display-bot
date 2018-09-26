@@ -1,6 +1,6 @@
  {
     "token": "",
     "logLevel": "debug",
-    "targetChannelId": "",
-    "displayFormat": " 𝐋𝐕 {0}"
+    "targetChannelName": "level-display-bot",
+    "displayFormat": " | 𝗟𝘃𝗹 {0}"
  }

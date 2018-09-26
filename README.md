@@ -10,7 +10,7 @@ A bot that reads the "level up" messages  of MEE6 and displays the users level n
  {
     "token": "your-bot-token",
     "logLevel": "debug",
-    "targetChannelId": "your-channel-id",
+    "targetChannelName": "level-display-bot",
     "displayFormat": " 𝐋𝐕 {0}" // {0} will be replaced by the level
  }
 ```
@@ -19,7 +19,7 @@ a. **token:** Token of your bot. You can create a bot [here](https://discordapp.
 
 b. **logLevel:** Log level of the bot.
 
-c. **targetChannelId:** The channel in which the MEEE6 Bot will log the "level up" notifications. If you wish to find out the id of the channel, click [here](https://support.discordapp.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-)
+c. **targetChannelName:** The name of the channel in which the MEEE6 Bot will log the "level up" notifications.
 
 d. **displayFormat:** The format in which the level is displayed next to the user. {0} is required and will be replaced by the level. Note: This bot will alway append
 the username before the level display.

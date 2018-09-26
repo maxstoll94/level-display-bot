@@ -6,7 +6,7 @@ var levelRegex = /level\s\d+/;
 var intRegex = /\d+/;
 var userIDRegex = /<@!\d{18}>/;
 var onlyIDRegex = /[^\d{18}]+/g;
-var targetChannelID = config.targetChannelID;
+var targetChannelName = config.targetChannelName;
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -27,13 +27,27 @@ bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+
+    if (null == config.token || null == config.targetChannelName || null == config.displayFormat){
+        logger.error("Configuration error! Please check your config and try again.");
+        logger.info("Disconnecting...");
+        bot.disconnect();
+    }
 });
 
 bot.on('message', function(botuser, botID, channelID, message, event) {
     logger.info("----------------------New Message Received!--------------------------");
-    logger.info("Channel: " + channelID);
+    logger.info("Channel ID: " + channelID);
 
-    if (null != message && channelID == targetChannelID && botuser == "MEE6") {
+    var channelName = "";
+    var channel = bot.channels[channelID];
+    
+    if (null != channel){
+        channelName = channel.name;
+        logger.info("Channel Name: " + channelName);
+    }
+    
+    if (null != message && channelName ==  targetChannelName && botuser == "MEE6") {
         logger.info("Message: " + message);
         var levelString = levelRegex.exec(message);
 
@@ -71,4 +85,4 @@ String.prototype.format = function() {
       a = a.replace("{" + k + "}", arguments[k])
     }
     return a
-  }
+};
