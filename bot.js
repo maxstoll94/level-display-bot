@@ -4,8 +4,8 @@ var config = require('./config.json');
 
 var levelRegex = /level\s\d+/;
 var intRegex = /\d+/;
-var userIDRegex = /<@!\d{18}>/;
-var onlyIDRegex = /[^\d{18}]+/g;
+var userIDRegex = /<@!\d{10,20}>/;
+var onlyIDRegex = /[^\d{10,20}]+/g;
 var targetChannelName = config.targetChannelName;
 
 // Configure logger settings
@@ -57,24 +57,35 @@ bot.on('message', function(botuser, botID, channelID, message, event) {
 
             if (null != level){
                 logger.info("Level: " + level);
-                var userID = userIDRegex.exec(message).toString().replace(onlyIDRegex, '');
+                var rawUserID = userIDRegex.exec(message)
                 
-                if (null != userID){
-                    logger.info("UserID: " + userID);        
-                    var user = bot.users[userID];
+                if (null != rawUserID){
+                    var parsedUserID = rawUserID.toString().replace(onlyIDRegex, '');
 
-                    if (null != user){
-                        bot.editNickname({
-                            serverID: bot.channels[channelID].guild_id,
-                            userID: userID,
-                            nick: user.username + config.displayFormat.format(level)
-                        }, function(data){
-                            logger.error(data);
-                        });
+                    if (null != parsedUserID){
+                        logger.info("UserID: " + userID);        
+                        var user = bot.users[userID];
+    
+                        if (null != user){
+                            bot.editNickname({
+                                serverID: bot.channels[channelID].guild_id,
+                                userID: userID,
+                                nick: user.username + config.displayFormat.format(level)
+                            }, function(data){
+                                if (null != data){
+                                    logger.error(data);
+                                }
+                            });
+                        }
+                        logger.error("Unable to retrieve User.");   
                     }
+                    logger.error("Unable to parse UserID.");   
                 }
-            }   
-        }       
+                logger.error("Unable to parse raw UserID.");                   
+            }
+            logger.error("Unable to parse Level.");      
+        }
+        logger.error("Unable to parse LevelString.");      
     }
 });
 
