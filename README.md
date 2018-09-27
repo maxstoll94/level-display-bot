@@ -8,10 +8,11 @@ A bot that reads the "level up" messages  of MEE6 and displays the users level n
 
 ```
  {
-    "token": "your-bot-token",
+    "token": "",
     "logLevel": "debug",
     "targetChannelName": "level-display-bot",
-    "displayFormat": " 𝐋𝐕 {0}" // {0} will be replaced by the level
+    "displayFormat": " | 𝗟𝘃𝗹 {0}",
+    "notifyUserID": ""
  }
 ```
 
@@ -23,6 +24,8 @@ c. **targetChannelName:** The name of the channel in which the MEEE6 Bot will lo
 
 d. **displayFormat:** The format in which the level is displayed next to the user. {0} is required and will be replaced by the level. Note: This bot will alway append
 the username before the level display.
+
+e. **notifyUserID:** Snowflake ID of the user/channel that should be notified when the bot receives an error.
 
 ### Install packages
 
